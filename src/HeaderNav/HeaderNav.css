@@ -1,0 +1,42 @@
+* {
+  margin: 0;
+  padding: 0;
+  /*
+  border: 1px solid red;
+*/
+}
+.Header{
+  background-color: #14181c;
+  color: #99aabb;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 100%;
+  font-weight: bold;
+
+}
+
+.imgLogo{
+ width: 5%;
+}
+
+.HeaderNav{
+  margin-right: 20px;
+}
+
+li:hover {
+  cursor: pointer;
+}
+.UlNav{
+  width: 250px;
+  height: auto;
+  display: flex;
+  list-style: none; 
+}
+.UlNav li a{
+  color: inherit;
+  text-decoration: none;  
+}
+.UlNav li{
+  margin: 0 5%;
+}
