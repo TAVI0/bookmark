@@ -9,10 +9,50 @@ function BookLog(props){
     const {
         starsSistem,
     } = React.useContext(BookContext);
+
+
+    const post = props.post;
+    const book = post.book;
+
+    const {completedStars,halfStar} = starsSistem(post.rated);
+    const HasReview = post.review != null && <GrTextAlignFull/>;
+    const liked = post.liked ? <BsFillSuitHeartFill fill='red'/> : <BsFillSuitHeartFill fill='gray'/>;
+    return(
+    <tr>{console.log(post)}
+        <td></td>
+        <td>{book.name}</td>
+        <td>{book.writer}</td>
+        <td></td>
+        <td>{post.date}</td>
+        <td>{completedStars}{halfStar}</td>
+        <td>{HasReview}</td>
+        <td>{liked}</td>
+        <td><AiFillEdit/></td>
+    </tr>
+    )
+    
+    /*
+    const {completedStars,halfStar} = starsSistem(post.rated);
+    const HasReview = post.review != null && <GrTextAlignFull/>;
+    const liked = post.liked ? <BsFillSuitHeartFill fill='red'/> : <BsFillSuitHeartFill fill='gray'/>;
+    return(
+
+    <tr>
+        <td></td>
+        <td>{book.name}</td>
+        <td>{book.writer}</td>
+        <td></td>
+        <td>{book.date}</td>
+        <td>{completedStars}{halfStar}</td>
+        <td>{HasReview}</td>
+        <td>{liked}</td>
+        <td><AiFillEdit/></td>
+    </tr>
+    )
+*/
+  /*
     const {completedStars,halfStar} = starsSistem(props.score);
     const { bookData } = useApiBooks(props.googId);
-
-
     const HasReview = props.review != null && <GrTextAlignFull/>;
     const liked = props.liked ? <BsFillSuitHeartFill fill='red'/> : <BsFillSuitHeartFill fill='gray'/>;
     return(
@@ -29,6 +69,8 @@ function BookLog(props){
         <td><AiFillEdit/></td>
     </tr>
     )
+
+ */
 }
 
 export {BookLog};
