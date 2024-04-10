@@ -1,14 +1,18 @@
 import { useParams } from "react-router-dom";
-import { userLog } from "../dataApp";
 import './ProfilePage.css'
+import { useGetUsers } from "../Hooks/useGetUser";
 
 function ProfilePage(){
 
     const { username } = useParams();
-    const user = userLog.find(elemento => elemento.username === username)
-    if( user){    
+    const { user, loading} = useGetUsers(username);
+
+    if (loading) {
+        return <p>Cargando...</p>; 
+    }
+    if(user){    
         return(
-        <>
+        <>{console.log(user)}
             <div className="Profile">
                 <div className='Profile-details'>
                     <img className="avatar" alt="avatar" src="/avatar.jpg"/>

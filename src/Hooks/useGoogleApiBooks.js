@@ -1,6 +1,6 @@
 import React from "react";
 
-function useApiBooks(googId){
+function useGoogleApiBooks(googId){
 
 const [bookData, setBookData] = React.useState();
 
@@ -15,4 +15,4 @@ React.useEffect(() => {
 return{ bookData };
 }
 
-export { useApiBooks}
+export { useGoogleApiBooks}

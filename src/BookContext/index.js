@@ -1,7 +1,6 @@
 import React from "react";
 import { AiFillStar } from 'react-icons/ai';
 import { FaStarHalf } from 'react-icons/fa';
-import { booklog } from '../dataApp';
 
 const BookContext = React.createContext();
 
@@ -19,18 +18,13 @@ function BookProvider( {children} ){
       return {completedStars,halfStar}
     }
 
-    const [booklogs, setbooklogs] = React.useState(booklog);
-
-
     return(
     <BookContext.Provider value={{
         openAddBookModal, setOpenAddBookModal,
         openLogoutModal, setOpenLogoutModal,
         openLoginModal, setOpenLoginModal,
         openRegisterModal, setOpenRegisterModal,
-        starsSistem,
-        booklogs,
-        setbooklogs
+        starsSistem
     }}>
         {children}
     </BookContext.Provider>
