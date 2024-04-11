@@ -1,26 +1,26 @@
 import React from "react";
 
-function useGetUsers(username){
+function useGetBookmarkApi(endpoint, value){
 
-  const [user, setUser] = React.useState();
+  const [data, setData] = React.useState();
   const [loading, setLoading] = React.useState(true); 
 
   React.useEffect(() => {
-    fetch(`http://localhost:8080/user/username/${username}`)
+    fetch(`http://localhost:8080${endpoint}${value}`)
       .then(response => 
         response.json()
       )
-      .then(data => {
-        console.log('API'+data)
-        setUser(data)
+      .then(dataJson => {
+    //    console.log('API'+data)
+        setData(dataJson)
         setLoading(false);
       })
       .catch(error => {
         console.error("Error al obtener los Usuarios:", error);
         setLoading(false);
       });
-  }, [username]);
+  }, [data]);
 
-  return { user, loading };
+  return { data, loading };
 }
-export {useGetUsers}
+export {useGetBookmarkApi}

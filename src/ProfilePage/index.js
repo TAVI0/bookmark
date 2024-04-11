@@ -1,11 +1,11 @@
 import { useParams } from "react-router-dom";
 import './ProfilePage.css'
-import { useGetUsers } from "../Hooks/useGetUser";
+import { useGetBookmarkApi } from "../Hooks/useGetBookmarkApi";
 
 function ProfilePage(){
 
     const { username } = useParams();
-    const { user, loading} = useGetUsers(username);
+    const {data:user, loading} = useGetBookmarkApi("/user/username/",username);
 
     if (loading) {
         return <p>Cargando...</p>; 
