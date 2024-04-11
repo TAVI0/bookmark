@@ -12,7 +12,7 @@ function ProfilePage(){
     }
     if(user){    
         return(
-        <>{console.log(user)}
+        <>
             <div className="Profile">
                 <div className='Profile-details'>
                     <img className="avatar" alt="avatar" src="/avatar.jpg"/>
