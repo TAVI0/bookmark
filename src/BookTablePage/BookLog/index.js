@@ -17,7 +17,7 @@ function BookLog(props){
     const HasReview = post.review != null && <GrTextAlignFull/>;
     const liked = post.liked ? <BsFillSuitHeartFill fill='red'/> : <BsFillSuitHeartFill fill='gray'/>;
     return(
-    <tr>{console.log(post)}
+    <tr>
         <td></td>
         <td>{book.name}</td>
         <td>{book.writer}</td>
