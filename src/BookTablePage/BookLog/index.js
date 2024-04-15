@@ -4,13 +4,11 @@ import { GrTextAlignFull } from 'react-icons/gr';
 import { BsFillSuitHeartFill} from 'react-icons/bs';
 import { BookContext } from "../../BookContext";
 
-function BookLog(props){
+function BookLog({post}){
     const {
         starsSistem,
     } = React.useContext(BookContext);
 
-
-    const post = props.post;
     const book = post.book;
 
     const {completedStars,halfStar} = starsSistem(post.rated);

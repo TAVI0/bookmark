@@ -5,13 +5,18 @@ import { StarsBar } from "../../StarsBar";
 import { BookContext } from "../../BookContext";
 
 function AddBookModal(){
-
     const {
         setOpenAddBookModal,
     } = React.useContext(BookContext);
-    const [newBookValue, setNewBookValue] = React.useState('');
+
+    
 
     const onSubmit = (event) => {
+        const nameInput = document.querySelector('.name').value;
+        const startDateInput = document.querySelector('.startDate').value;
+        const endDateInput = document.querySelector('.endDate').value;
+        const reviewInput = document.querySelector('.review').value;
+
         event.preventDefault();
         setOpenAddBookModal(false);
     };
@@ -21,42 +26,35 @@ function AddBookModal(){
         setOpenAddBookModal(false);
     };
 
-    const onChange = (event) => {
-        setNewBookValue(event.target.value);
-    };
-
     return ReactDOM.createPortal(
         <div className='ModalBackground'>
             <form onSubmit={onSubmit}>
-            <label>ADD TO YOUR BOOKS...</label>
-            <div>
-            <input type="date"></input><input type="date"></input>
-            </div>
-            <textarea
-                placeholder="Nacidos de la bruma"
-                value={newBookValue}
-                onChange={onChange}
-            />
-            <div>
-                <StarsBar/>
-            </div>
-            
-            <div className="Form-buttonContainer">
-                <button 
-                    className="Form-button Form-button--cancel"
-                    type="button"
-                    onClick={onCancel}
-                >
-                    Cancelar
-                </button>
-                <button 
-                    className="Form-button Form-button--add"
-                    type="submit"
-                >
-                    Añadir
-                </button>
-            </div>
-        </form>
+                <label>ADD TO YOUR BOOKS...</label>
+                <div>
+                <input className='name' type="text"></input>
+                <input className='startDate' type="date"></input><input className='endDate' type="date"></input>
+                </div>
+                <textarea className='review'
+                    placeholder="Nacidos de la bruma"
+                />
+                <div>
+                    <StarsBar/>
+                </div>
+                
+                <div className="Form-buttonContainer">
+                    <button 
+                        className="Form-button Form-button--cancel" type="button"
+                        onClick={onCancel} >
+                        Cancelar
+                    </button>
+                    <button 
+                        className="Form-button Form-button--add"
+                        type="submit"
+                    >
+                        Añadir
+                    </button>
+                </div>
+            </form>
         </div>,
         document.getElementById('modal')
     );

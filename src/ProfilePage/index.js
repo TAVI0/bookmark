@@ -1,15 +1,16 @@
 import { useParams } from "react-router-dom";
 import './ProfilePage.css'
 import { useGetBookmarkApi } from "../Hooks/useGetBookmarkApi";
+import { useFetch } from  '../Hooks/useFetch';
 
 function ProfilePage(){
 
     const { username } = useParams();
-    const {data:user, loading} = useGetBookmarkApi("/user/username/",username);
+    const {data:user, loading} = useFetch("http://localhost:8080/user/username/"+username);
 
     if (loading) {
         return <p>Cargando...</p>; 
-    }
+    }else{
     if(user){    
         return(
         <>
@@ -46,5 +47,6 @@ function ProfilePage(){
         );
     }
     return (<h2>User not found!</h2>);
+}
 }
 export { ProfilePage }
