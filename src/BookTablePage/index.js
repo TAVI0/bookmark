@@ -1,13 +1,11 @@
 import { useParams } from "react-router-dom";
 import { BookLog } from "./BookLog";
 import React from 'react';
-import { useGetBookmarkApi } from "../Hooks/useGetBookmarkApi";
 import { useFetch } from "../Hooks/useFetch";
 
 function BookTablePage () {
     const { username } = useParams();
 
-    //const {data:posts, loading} = useGetBookmarkApi("/post/username/",username);
     const {data:posts, loading} = useFetch("http://localhost:8080/post/username/"+username);
 
 

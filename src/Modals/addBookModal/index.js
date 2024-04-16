@@ -1,25 +1,58 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import './Modal.css';
 import { StarsBar } from "../../StarsBar";
 import { BookContext } from "../../BookContext";
+import { useAuth } from '../../App/auth';
+import axios from 'axios';
 
 function AddBookModal(){
     const {
         setOpenAddBookModal,
     } = React.useContext(BookContext);
+    const auth = useAuth();
+    const [post, setPost] = useState({
+        idUser: auth.user.id,
+        idBook: 1,
+        date:'',
+        review:'',
+        rated:0,
+        spoiler:false,
+        liked:false,
+        readBefore:false,
+        book:{
+            "id": 1,
+            "name": "El Gran Gatsby",
+            "writer": "F. Scott Fitzgerald"
+            }
+    })
 
-    
+    const apiUrl = 'http://localhost:8080/post/save'; // URL de la API    
 
-    const onSubmit = (event) => {
-        const nameInput = document.querySelector('.name').value;
-        const startDateInput = document.querySelector('.startDate').value;
-        const endDateInput = document.querySelector('.endDate').value;
-        const reviewInput = document.querySelector('.review').value;
 
+
+ 
+    const onSubmit = async (event) => {
         event.preventDefault();
-        setOpenAddBookModal(false);
-    };
+        console.log(post);
+        console.log(auth.user)
+        try {
+            const response = await axios.post(apiUrl, post);
+            console.log('Respuesta del servidor:', response.data);
+            // Realiza acciones adicionales con la respuesta
+          } catch (error) {
+            console.error('Error al realizar la solicitud:', error);
+          }
+        //setOpenAddBookModal(false);
+    }
+
+    const handleInput = (event) =>{
+        setPost({...post, [event.target.className]: event.target.value})
+    }
+    const handleBooleanInput = (event) =>{
+        setPost({...post, [event.target.className]: event.target.checked})
+    }
+
 
     const onCancel = (event) => {
         event.preventDefault();
@@ -32,11 +65,13 @@ function AddBookModal(){
                 <label>ADD TO YOUR BOOKS...</label>
                 <div>
                 <input className='name' type="text"></input>
-                <input className='startDate' type="date"></input><input className='endDate' type="date"></input>
+                <input className='startDate' type="date"onChange={handleInput}></input><input className='endDate' type="date"></input>
                 </div>
-                <textarea className='review'
-                    placeholder="Nacidos de la bruma"
-                />
+                <textarea className='review' onChange={handleInput} placeholder="Nacidos de la bruma"/>                
+                Rated <input className='rated' type="number" onChange={handleInput}></input>
+                Spoiler <input className='spoiler' type='checkbox' onChange={handleBooleanInput}></input>
+                ReadBefore <input className='readBefore' type='checkbox' onChange={handleBooleanInput}></input>
+                Liked <input className='liked' type='checkbox' onChange={handleBooleanInput}></input>
                 <div>
                     <StarsBar/>
                 </div>

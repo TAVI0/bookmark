@@ -1,6 +1,5 @@
 import { useParams } from "react-router-dom";
 import './ProfilePage.css'
-import { useGetBookmarkApi } from "../Hooks/useGetBookmarkApi";
 import { useFetch } from  '../Hooks/useFetch';
 
 function ProfilePage(){
