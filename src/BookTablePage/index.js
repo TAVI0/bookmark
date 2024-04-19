@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import { BookLog } from "./BookLog";
 import React from 'react';
 import { useFetch } from "../Hooks/useFetch";
+import "./index.css"
 
 function BookTablePage () {
     const { username } = useParams();
@@ -20,8 +21,9 @@ function BookTablePage () {
                         <th>img</th>
                         <th>Book</th>
                         <th>Autor</th>
-                        <th>Released</th>
-                        <th>add-finish</th>
+                        <th>start</th>
+                        <th>-</th>
+                        <th>end</th>
                         <th>Rating</th>
                         <th>Review</th>
                         <th>Like</th>

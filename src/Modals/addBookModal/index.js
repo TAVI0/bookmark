@@ -4,6 +4,7 @@ import './Modal.css';
 import { StarsBar } from "../../StarsBar";
 import { BookContext } from "../../BookContext";
 import { useAuth } from '../../App/auth';
+import { APIPOST } from '../../dataApp';
 import axios from 'axios';
 
 function AddBookModal(){
@@ -13,21 +14,16 @@ function AddBookModal(){
     const auth = useAuth();
     const [post, setPost] = useState({
         idUser: auth.user.id,
-        idBook: 1,
-        date:'',
+        idBook: 3,
+        datePost:new Date(),
         review:'',
         rated:0,
         spoiler:false,
         liked:false,
         readBefore:false,
-        book:{
-            "id": 1,
-            "name": "El Gran Gatsby",
-            "writer": "F. Scott Fitzgerald"
-            }
     })
 
-    const apiUrl = 'http://localhost:8080/post/save'; // URL de la API    
+    const apiUrl = APIPOST ; // URL de la API    
 
 
 
@@ -65,7 +61,7 @@ function AddBookModal(){
                 <label>ADD TO YOUR BOOKS...</label>
                 <div>
                 <input className='name' type="text"></input>
-                <input className='startDate' type="date"onChange={handleInput}></input><input className='endDate' type="date"></input>
+                <input className='datePost' type="date"onChange={handleInput}></input><input className='endDate' type="date"></input>
                 </div>
                 <textarea className='review' onChange={handleInput} placeholder="Nacidos de la bruma"/>                
                 Rated <input className='rated' type="number" onChange={handleInput}></input>

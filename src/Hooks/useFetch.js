@@ -12,7 +12,6 @@ function useFetch(url){
         .then((data) => {
             setData(data);
             setLoading(false);
-            console.log(data )
         })
         //.finally(()=> setLoading(false))
         .catch(error => {
