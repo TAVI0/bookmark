@@ -1,48 +1,60 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { useAuth } from '../../App/auth';
-import { BookContext } from '../../BookContext';
-import { userLog } from '../../dataApp';
+import React, { useState } from "react";
+import ReactDOM from "react-dom";
+import { BookContext } from "../../BookContext";
 
-function LoginModal(){
-    const auth = useAuth();
-    const [username, setUsername] = React.useState('');
-    const {setOpenLoginModal} = React.useContext(BookContext);
+function LoginModal() {
+  const [username, setUsername] = React.useState("");
+  const [password, setPassword] = React.useState("");
+  const { setOpenLoginModal } = React.useContext(BookContext);
+  const [ error, setError] = React.useState(false);
 
-    
-    const login = (e) => {
-        e.preventDefault();
-        const user = userLog.find(elemento => elemento.username === username)
-        if (user){
-            setOpenLoginModal(false);
-            auth.login({user});
-        }else{
-            alert("Usuario no registrado");
-        }
-        
-    };
+  const handleSubmit = (e)=>{
+    e.preventDefault()
+    if(username==="" || password ===""){
+      setError(true)
+      return
+    }
+    setError(false)
+  }
 
-      const onCancel = (event) => {
-        event.preventDefault();
-        setOpenLoginModal(false);
-    };
+  const onCancel = (event) => {
+    event.preventDefault();
+    setOpenLoginModal(false);
+  };
 
-    return  ReactDOM.createPortal(
-        <div className='ModalBackground'>
-            <form className="Form-buttonContainer" onSubmit={login}>
-                <label></label>
-                <label>LOGIN </label>
-                <label>Username: </label>
-                <input 
-                    value={username}
-                    onChange={e => setUsername(e.target.value)}
-                />
-                <button className="Form-button Form-button--add" type='submit'>Entrar</button>
-                <button className="Form-button Form-button--cancel" type="button" onClick={onCancel}>Cancelar</button>                    
-            </form>
-        </div>,
-        document.getElementById('modal')
-    )
+  return ReactDOM.createPortal(
+    <div className="ModalBackground">
+      <form className="Form-buttonContainer"
+        onSubmit={handleSubmit} >
+        <label></label>
+        <label>LOGIN</label>
+        <label>Username</label>
+        <input 
+          type="text" 
+          value={username}
+          onChange={e => setUsername(e.target.value)}
+          />
+        <label>Password</label>
+        <input 
+          type="password"
+          value={password}
+          onChange={e => setPassword(e.target.value)}
+          />
+        <button className="Form-button Form-button--add" type="submit">
+          Entrar
+        </button>
+        <button
+          className="Form-button Form-button--cancel"
+          type="button"
+          onClick={onCancel}
+        >
+          Cancelar
+        </button>
+      {error && <p>TODOS LOS CAMPOS SON OBLIGATORIOS</p>}
+      </form>
+    </div>,
+    document.getElementById("modal")
+  );
 }
 
 export { LoginModal };

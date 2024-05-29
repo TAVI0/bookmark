@@ -1,13 +1,13 @@
 import { useParams } from "react-router-dom";
-import { BookLog } from "./BookLog";
+import { BookLog } from "../BookLog";
 import React from 'react';
-import { useFetch } from "../Hooks/useFetch";
+import { useFetch } from "../hooks/useFetch";
 import "./index.css"
 
 function BookTablePage () {
     const { username } = useParams();
 
-    const {data:posts, loading} = useFetch("http://localhost:8080/post/username/"+username);
+    const {data:posts, loading} = useFetch("http://localhost:8080/post/username/",username);
 
 
     if (loading) {

@@ -1,18 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { useAuth } from '../../App/auth';
 import { BookContext } from '../../BookContext';
 
 function RegisterModal(){
-    const auth = useAuth();
+  //  const auth = useAuth();
     const [username, setUsername] = React.useState('');
+    const [password, setPassword] = React.useState('');
     const {setOpenRegisterModal} = React.useContext(BookContext);
 
     
     const login = (e) => {
         e.preventDefault();
         setOpenRegisterModal(false);
-        auth.login({ username });
+       // auth.login({ username });
     };
 
       const onCancel = (event) => {
@@ -29,7 +29,13 @@ function RegisterModal(){
                     value={username}
                     onChange={e => setUsername(e.target.value)}
                 />
-                <button className="Form-button Form-button--add" type='submit'>Entrar</button>
+                <label>Password: </label>
+                <input 
+                    value={password}
+                    type='password'
+                    onChange={e => setPassword(e.target.value)}
+                />
+                <button className="Form-button Form-button--add" type='submit'>Crear</button>
                 <button className="Form-button Form-button--cancel" type="button" onClick={onCancel}>Cancelar</button>                    
             </form>
         </div>,

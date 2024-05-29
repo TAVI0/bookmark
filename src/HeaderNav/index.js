@@ -3,26 +3,26 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import React from 'react';
 import './HeaderNav.css'
 import { AddBookModal } from '../Modals/addBookModal';
-import { useAuth } from '../App/auth';
 import { LogoutModal } from '../Modals/LogoutModal';
 import { LoginModal } from '../Modals/LoginModal';
 import { RegisterModal } from '../Modals/RegisterModal';
+import { useAuth } from '../App/auth/AuthProvider';
 function HeaderNav(){
     const { openAddBookModal, setOpenAddBookModal, 
             openLogoutModal, setOpenLogoutModal,
             openLoginModal, setOpenLoginModal,
             openRegisterModal, setOpenRegisterModal} = React.useContext(BookContext);
     const navigate = useNavigate();
-    const auth = useAuth();
 
+    const auth = useAuth();
     const routes = [];
-    if (auth.user?.username !== undefined) {
+    if (auth.isAuthenticated){
         routes.push({
-            to: '/'+auth.user?.username,
-            text: auth.user?.username,
+            to: '/'+'bob',
+            text: 'bob',
         });
         routes.push({
-            to:'/'+auth.user?.username+'/books',
+            to:'/'+'bob'+'/books',
             text:'Books',
         });
    }
@@ -39,10 +39,10 @@ function HeaderNav(){
                             </li>
                         ))}
                         
-                        { auth.user && <li onClick={() => {setOpenAddBookModal(!openAddBookModal)}} > log </li>}
-                        { auth.user && <li onClick={() => {setOpenLogoutModal(!openLogoutModal)}}> Logout </li>}
-                        { !auth.user && <li onClick={() => {setOpenLoginModal(!openLoginModal)}}> Login </li>}
-                        { !auth.user && <li onClick={() => {setOpenRegisterModal(!openRegisterModal)}}> Register </li>}
+                        { auth.isAuthenticated && <li onClick={() => {setOpenAddBookModal(!openAddBookModal)}} > log </li>}
+                        { auth.isAuthenticated && <li onClick={() => {setOpenLogoutModal(!openLogoutModal)}}> Logout </li>}
+                        { !auth.isAuthenticated && <li onClick={() => {setOpenLoginModal(!openLoginModal)}}> Login </li>}
+                        { !auth.isAuthenticated && <li onClick={() => {setOpenRegisterModal(!openRegisterModal)}}> Register </li>}
 
                     </ul>
                 </nav>

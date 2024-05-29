@@ -1,11 +1,11 @@
 import { useParams } from "react-router-dom";
 import './ProfilePage.css'
-import { useFetch } from  '../Hooks/useFetch';
-
+import { useFetch } from  '../hooks/useFetch';
+import { GETUSERBYUSERNAME } from "../dataApp";
 function ProfilePage(){
 
     const { username } = useParams();
-    const {data:user, loading} = useFetch("http://localhost:8080/user/username/"+username);
+    const {data:user, loading} = useFetch(GETUSERBYUSERNAME, username);
 
     if (loading) {
         return <p>Cargando...</p>; 

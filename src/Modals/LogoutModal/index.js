@@ -1,15 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { useAuth } from '../../App/auth';
 import { BookContext } from '../../BookContext';
 
 function LogoutModal(){
-    const auth = useAuth();
+   // const auth = useAuth();
     const { setOpenLogoutModal } = React.useContext(BookContext);
     const logout = (e) => {
         e.preventDefault();
         setOpenLogoutModal(false);
-        auth.logout();
+       // auth.logout();
     };
 
     const onCancel = (event) => {
