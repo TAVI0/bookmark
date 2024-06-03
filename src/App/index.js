@@ -14,7 +14,6 @@ function App() {
     <>
     <BrowserRouter>
       <AuthProvider>
-      {console.log('AuthProvider wrapping components')}
         <BookProvider>
         <HeaderNav/>
           <Routes>

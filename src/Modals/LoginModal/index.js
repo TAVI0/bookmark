@@ -1,21 +1,45 @@
 import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import { BookContext } from "../../BookContext";
+import { useAuth } from "../../App/auth/AuthProvider";
+import { API_URL } from "../../dataApp";
+import { useNavigate } from "react-router-dom";
 
 function LoginModal() {
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
   const { setOpenLoginModal } = React.useContext(BookContext);
   const [ error, setError] = React.useState(false);
+  const goTo = useNavigate();
 
-  const handleSubmit = (e)=>{
-    e.preventDefault()
-    if(username==="" || password ===""){
-      setError(true)
-      return
+  const auth = useAuth();
+
+
+  async function handleSubmit(e){
+    e.preventDefault();
+    try{
+        const response = await fetch(`${API_URL}user/login`,{
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    username,
+                    password
+                })
+        });
+    if(response.ok){
+        setOpenLoginModal(false);
+        goTo('/'+username);
+        console.log("EL USUARIO SE LOGEO CORRECTAMENTE")
+    }else{
+        console.log("Algo malio sal")
     }
-    setError(false)
-  }
+    }catch(error){
+        console.log(error)
+    }
+}
+
 
   const onCancel = (event) => {
     event.preventDefault();
@@ -24,8 +48,7 @@ function LoginModal() {
 
   return ReactDOM.createPortal(
     <div className="ModalBackground">
-      <form className="Form-buttonContainer"
-        onSubmit={handleSubmit} >
+      <form className="Form-buttonContainer" onSubmit={handleSubmit} >
         <label></label>
         <label>LOGIN</label>
         <label>Username</label>
