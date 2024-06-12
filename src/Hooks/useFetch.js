@@ -10,11 +10,13 @@ function useFetch(url, dato){
     if (dato != null) {
         setLoading(true);
         fetch(`${url}${dato}`, {
-            method: 'GET',
-            headers: {
+            method: 'GET'
+            /*
+            ,headers: {
                 'Content-Type': 'application/json',
                 'Authorization': 'Basic dXNlcjo5YjFhNjA4Ny0wMzdjLTQyZGItYjMzZS05Y2YxNWFiMTcyZmQ='
             }
+            */
         })
         .then(response => response.json())
         .then((data) => {

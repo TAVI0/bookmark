@@ -10,7 +10,7 @@ function AddBookModal() {
   const { setOpenAddBookModal } = React.useContext(BookContext);
  // const auth = useAuth();
   const [post, setPost] = useState({
-    idUser: "user",//auth.user.id,
+    idUser: 1,//auth.user.id,
     idBook: 3,
     datePost: new Date(),
     review: "",
@@ -20,13 +20,11 @@ function AddBookModal() {
     readBefore: false,
   });
 
-  const apiUrl = POSTPOST;
-
   const onSubmit = async (event) => {
     event.preventDefault();
     console.log(post);
     try {
-      const response = await axios.post(apiUrl, post);
+      const response = await axios.post(POSTPOST, post);
       console.log("Respuesta del servidor:", response.data);
       // Realiza acciones adicionales con la respuesta
     } catch (error) {
@@ -51,49 +49,33 @@ function AddBookModal() {
     <div className="ModalBackground">
       <form onSubmit={onSubmit}>
         <label>ADD TO YOUR BOOKS...</label>
+          <input className="name" type="text" placeholder="Nacidos de la bruma"/>
         <div>
-          <input className="name" type="text"></input>
-          <input
-            className="datePost"
-            type="date"
-            onChange={handleInput}
-          ></input>
-          <input className="endDate" type="date"></input>
+          <input className="datePost" type="date" onChange={handleInput}/>
+          <input className="endDate" type="date"/>
         </div>
-        <textarea
-          className="review"
-          onChange={handleInput}
-          placeholder="Nacidos de la bruma"
-        />
-        Rated{" "}
-        <input className="rated" type="number" onChange={handleInput}></input>
-        Spoiler{" "}
-        <input
-          className="spoiler"
-          type="checkbox"
-          onChange={handleBooleanInput}
-        ></input>
-        ReadBefore{" "}
-        <input
-          className="readBefore"
-          type="checkbox"
-          onChange={handleBooleanInput}
-        ></input>
-        Liked{" "}
-        <input
-          className="liked"
-          type="checkbox"
-          onChange={handleBooleanInput}
-        ></input>
+        <textarea className="review" onChange={handleInput} placeholder="Escribi tu review aqui..."/>
+        <div>
+          Rated
+          <input className="rated" type="number" onChange={handleInput}/>
+        </div>
+        <div>
+          Spoiler
+          <input className="spoiler" type="checkbox" onChange={handleBooleanInput}/>
+        </div>
+        <div>
+          ReadBefore
+          <input className="readBefore" type="checkbox" onChange={handleBooleanInput}/>
+        </div>
+        <div>
+          Liked
+          <input className="liked" type="checkbox" onChange={handleBooleanInput}/>
+        </div>
         <div>
           <StarsBar />
         </div>
         <div className="Form-buttonContainer">
-          <button
-            className="Form-button Form-button--cancel"
-            type="button"
-            onClick={onCancel}
-          >
+          <button className="Form-button Form-button--cancel" type="button" onClick={onCancel}>
             Cancelar
           </button>
           <button className="Form-button Form-button--add" type="submit">

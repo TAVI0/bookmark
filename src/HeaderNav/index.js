@@ -39,7 +39,7 @@ function HeaderNav(){
                             </li>
                         ))}
                         
-                        { auth.isAuthenticated && <li onClick={() => {setOpenAddBookModal(!openAddBookModal)}} > log </li>}
+                        { !auth.isAuthenticated && <li onClick={() => {setOpenAddBookModal(!openAddBookModal)}} > log </li>}
                         { auth.isAuthenticated && <li onClick={() => {setOpenLogoutModal(!openLogoutModal)}}> Logout </li>}
                         { !auth.isAuthenticated && <li onClick={() => {setOpenLoginModal(!openLoginModal)}}> Login </li>}
                         { !auth.isAuthenticated && <li onClick={() => {setOpenRegisterModal(!openRegisterModal)}}> Register </li>}
