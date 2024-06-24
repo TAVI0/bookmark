@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { getAuthToken } from "../App/auth/AuthProvider";
 
 function useFetch(url, dato){
 
@@ -11,12 +12,12 @@ function useFetch(url, dato){
         setLoading(true);
         fetch(`${url}${dato}`, {
             method: 'GET'
-            /*
+            
             ,headers: {
                 'Content-Type': 'application/json',
-                'Authorization': 'Basic dXNlcjo5YjFhNjA4Ny0wMzdjLTQyZGItYjMzZS05Y2YxNWFiMTcyZmQ='
+                'Authorization': `Bearer `+getAuthToken()
             }
-            */
+            
         })
         .then(response => response.json())
         .then((data) => {

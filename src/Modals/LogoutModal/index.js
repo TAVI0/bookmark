@@ -1,13 +1,22 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BookContext } from '../../BookContext';
+import { setAuthToken, useAuth } from '../../App/auth/AuthProvider';
+import { useNavigate } from 'react-router-dom';
 
 function LogoutModal(){
-   // const auth = useAuth();
+    const goTo = useNavigate();
+
+    const auth = useAuth();
     const { setOpenLogoutModal } = React.useContext(BookContext);
     const logout = (e) => {
         e.preventDefault();
         setOpenLogoutModal(false);
+        auth.setUserLogin("");
+        auth.setIsAuthenticated(false);
+        setAuthToken(null)
+        goTo('/');
+
        // auth.logout();
     };
 

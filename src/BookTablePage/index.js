@@ -31,7 +31,8 @@ function BookTablePage () {
                     </tr>    
                 </thead>
                 <tbody>
-                    {posts.map((post) => (
+                    
+                    {posts && posts.map((post) => (
                     <BookLog
                         key={post.id}
                         post={post}

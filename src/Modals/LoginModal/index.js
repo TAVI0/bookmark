@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import { BookContext } from "../../BookContext";
-import { useAuth } from "../../App/auth/AuthProvider";
+import { setAuthToken, useAuth } from "../../App/auth/AuthProvider";
 import { API_URL } from "../../dataApp";
 import { useNavigate } from "react-router-dom";
 
@@ -18,7 +18,7 @@ function LoginModal() {
   async function handleSubmit(e){
     e.preventDefault();
     try{
-        const response = await fetch(`${API_URL}user/login`,{
+        const response = await fetch(`${API_URL}auth/login`,{
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -30,6 +30,12 @@ function LoginModal() {
         });
     if(response.ok){
         setOpenLoginModal(false);
+
+        const responseData = await response.json();
+        const authorizationToken = responseData.token;
+        auth.setIsAuthenticated(true)
+        auth.setUserLogin(responseData.username)
+        setAuthToken(authorizationToken)
         goTo('/'+username);
         console.log("EL USUARIO SE LOGEO CORRECTAMENTE")
     }else{

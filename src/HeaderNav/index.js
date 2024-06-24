@@ -18,11 +18,11 @@ function HeaderNav(){
     const routes = [];
     if (auth.isAuthenticated){
         routes.push({
-            to: '/'+'bob',
-            text: 'bob',
+            to: '/'+auth.userLogin,
+            text: auth.userLogin,
         });
         routes.push({
-            to:'/'+'bob'+'/books',
+            to:'/'+auth.userLogin+'/books',
             text:'Books',
         });
    }
@@ -39,7 +39,7 @@ function HeaderNav(){
                             </li>
                         ))}
                         
-                        { !auth.isAuthenticated && <li onClick={() => {setOpenAddBookModal(!openAddBookModal)}} > log </li>}
+                        { auth.isAuthenticated && <li onClick={() => {setOpenAddBookModal(!openAddBookModal)}} > log </li>}
                         { auth.isAuthenticated && <li onClick={() => {setOpenLogoutModal(!openLogoutModal)}}> Logout </li>}
                         { !auth.isAuthenticated && <li onClick={() => {setOpenLoginModal(!openLoginModal)}}> Login </li>}
                         { !auth.isAuthenticated && <li onClick={() => {setOpenRegisterModal(!openRegisterModal)}}> Register </li>}
