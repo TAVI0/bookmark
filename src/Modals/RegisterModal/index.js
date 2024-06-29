@@ -5,7 +5,6 @@ import { API_URL } from '../../dataApp';
 import { useNavigate } from 'react-router-dom';
 
 function RegisterModal(){
-  //  const auth = useAuth();
     const [username, setUsername] = React.useState('');
     const [password, setPassword] = React.useState('');
     const {setOpenRegisterModal} = React.useContext(BookContext);
@@ -23,8 +22,7 @@ function RegisterModal(){
             const response = await fetch(`${API_URL}user/save`,{
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Basic dXNlcjo5YjFhNjA4Ny0wMzdjLTQyZGItYjMzZS05Y2YxNWFiMTcyZmQ='
+                    'Content-Type': 'application/json'
                     },
                     body: JSON.stringify({
                         username,

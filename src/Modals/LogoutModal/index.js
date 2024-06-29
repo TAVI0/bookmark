@@ -14,10 +14,9 @@ function LogoutModal(){
         setOpenLogoutModal(false);
         auth.setUserLogin("");
         auth.setIsAuthenticated(false);
+        window.localStorage.setItem("auth_token", null);
         setAuthToken(null)
         goTo('/');
-
-       // auth.logout();
     };
 
     const onCancel = (event) => {

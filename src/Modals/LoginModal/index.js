@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import ReactDOM from "react-dom";
 import { BookContext } from "../../BookContext";
-import { setAuthToken, useAuth } from "../../App/auth/AuthProvider";
+import { useAuth } from "../../App/auth/AuthProvider";
 import { API_URL } from "../../dataApp";
 import { useNavigate } from "react-router-dom";
 
@@ -32,11 +32,10 @@ function LoginModal() {
         setOpenLoginModal(false);
 
         const responseData = await response.json();
-        const authorizationToken = responseData.token;
-        auth.setIsAuthenticated(true)
-        auth.setUserLogin(responseData.username)
-        setAuthToken(authorizationToken)
-        goTo('/'+username);
+        if(responseData!=null){
+          auth.saveUser(responseData);
+        }
+        goTo('/'+responseData.username);
         console.log("EL USUARIO SE LOGEO CORRECTAMENTE")
     }else{
         console.log("Algo malio sal")
