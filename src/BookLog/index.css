@@ -1,3 +1,50 @@
-td{
-    color: rgb(255, 255, 255);
+td {
+    color: #ffffff;
+    padding: 20px 10px;
+    /* Línea gris al final de cada fila */
+  }
+  tr {
+    position: relative; /* Necesario para que el pseudo-elemento se posicione correctamente */
+  }
+  
+  tr::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    width: 100%;
+    border-bottom: 1px solid #2a323d; /* Línea gris continua al final de cada fila */
+  }
+  
+.logoBook{
+  width: 50px;
+}
+
+/* Estilo básico para todos los enlaces de navegación con la clase BookName */
+.BookName {
+  color: #ffffff; /* Cambia este color al que desees */
+  text-decoration: none;
+}
+
+/* Estilo para enlaces visitados */
+.BookName:visited {
+  color: #ffffff; /* El mismo color que para los enlaces normales */
+  text-decoration: none;
+}
+
+/* Estilo para enlaces al enfocarse */
+.BookName:focus {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+/* Estilo para enlaces al pasar el cursor por encima */
+.BookName:hover {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+/* Estilo para enlaces activos (al hacer clic) */
+.BookName:active {
+  color: #ffffff;
+  text-decoration: none;
 }

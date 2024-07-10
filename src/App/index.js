@@ -4,9 +4,11 @@ import { ProfilePage } from '../ProfilePage';
 import { BookTablePage } from '../BookTablePage';
 import { BookProvider } from '../BookContext';
 import { SettingsPage } from '../SettingsPage';
+
 import { HeaderNav } from '../HeaderNav';
 import { ProtectedRoute } from '../ProtectedRoute';
 import { AuthProvider } from './auth/AuthProvider';
+import { PostPage } from './PostPage';
 
 
 function App() {
@@ -19,7 +21,7 @@ function App() {
           <Routes>
             <Route path="/:username" element={<ProfilePage />}/>
             <Route path="/:username/books" element={<BookTablePage/>}/> 
-            
+            <Route path="/:username/books/:post" element={<PostPage/>}/>       
             <Route element={<ProtectedRoute />}>
               <Route path="/settings" element={<SettingsPage />} />
             </Route>

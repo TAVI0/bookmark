@@ -23,20 +23,18 @@ export function AuthProvider({ children }) {
             setIsAuthenticated(true);
         }else{
             const token = getAuthToken();
-            if(token!='null'){
+            if(token!=='null'){
                 try{
                     fetch(`${API_URL}auth/getUserByJWT/${token}`, {
                         method: 'GET'
                         ,headers: {
                             'Content-Type': 'application/json',
                         }
-                        
                     })
                     .then(response => response.text())
                     .then((data) => {
                         setUserLogin(data);
                     })
-
                 }catch{
                     console.log("error");
                 }
