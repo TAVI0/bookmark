@@ -21,7 +21,7 @@ function App() {
           <Routes>
             <Route path="/:username" element={<ProfilePage />}/>
             <Route path="/:username/books" element={<BookTablePage/>}/> 
-            <Route path="/:username/books/:post" element={<PostPage/>}/>       
+            <Route path="/:username/books/:postName" element={<PostPage/>}/>       
             <Route element={<ProtectedRoute />}>
               <Route path="/settings" element={<SettingsPage />} />
             </Route>
