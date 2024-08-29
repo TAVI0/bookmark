@@ -1,14 +1,16 @@
 import { React } from 'react';
 import { Routes, Route, BrowserRouter } from 'react-router-dom'
-import { ProfilePage } from '../ProfilePage';
-import { BookTablePage } from '../BookTablePage';
-import { BookProvider } from '../BookContext';
-import { SettingsPage } from '../SettingsPage';
+import { ProfilePage } from '../ProfilePage/index.js';
+import { BookTablePage } from '../BookTablePage/index.js';
+import { BookProvider } from '../BookContext/index.js';
+import { SettingsPage } from '../SettingsPage/index.js';
 
-import { HeaderNav } from '../HeaderNav';
-import { ProtectedRoute } from '../ProtectedRoute';
-import { AuthProvider } from './auth/AuthProvider';
-import { PostPage } from './PostPage';
+import { HeaderNav } from '../HeaderNav/index.js';
+import { ProtectedRoute } from '../ProtectedRoute/index.js';
+import { AuthProvider } from './auth/AuthProvider.js';
+import { PostPage } from './PostPage/index.js';
+import { HomePage } from './HomePage/index.js';
+import { FooterComponent } from './FooterComponent/index.jsx';
 
 
 function App() {
@@ -25,9 +27,10 @@ function App() {
             <Route element={<ProtectedRoute />}>
               <Route path="/settings" element={<SettingsPage />} />
             </Route>
-            <Route path="/" element={<p>HOLA MUNDO</p>}/> 
+            <Route path="/" element={<HomePage/>}/> 
             <Route path="*" element={<p>Not found</p>}  />
           </Routes>
+        <FooterComponent/>
         </BookProvider>
       </AuthProvider>
     </BrowserRouter>
