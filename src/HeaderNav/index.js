@@ -2,7 +2,6 @@ import { BookContext } from '../BookContext';
 import { NavLink, useNavigate } from 'react-router-dom';
 import React from 'react';
 import { AddBookModal } from '../Modals/addBookModal';
-import { LogoutModal } from '../Modals/LogoutModal';
 import { LoginModal } from '../Modals/LoginModal';
 import { RegisterModal } from '../Modals/RegisterModal';
 import { useAuth } from '../App/auth/AuthProvider';
@@ -12,7 +11,6 @@ import { Bell } from 'lucide-react'
 import { AvatarImage } from '@radix-ui/react-avatar';
 function HeaderNav(){
     const { openAddBookModal, setOpenAddBookModal, 
-            openLogoutModal, setOpenLogoutModal,
             openLoginModal, setOpenLoginModal,
             openRegisterModal, setOpenRegisterModal} = React.useContext(BookContext);
     const navigate = useNavigate();
@@ -82,7 +80,6 @@ function HeaderNav(){
         </nav>
         
         {openAddBookModal && <AddBookModal />}
-        {openLogoutModal && <LogoutModal />}
         {openLoginModal && <LoginModal />}
         {openRegisterModal && <RegisterModal />}
       </div>
