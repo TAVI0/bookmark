@@ -1,70 +1,105 @@
-# Getting Started with Create React App
+# Bookmark
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+![React](https://img.shields.io/badge/React-18.2.0-61DAFB.svg?logo=react\&logoColor=black) ![MUI](https://img.shields.io/badge/MUI-5.x-007FFF.svg?logo=mui\&logoColor=white) ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.x-06B6D4.svg?logo=tailwindcss) ![License](https://img.shields.io/badge/License-MIT-green.svg)
 
-## Available Scripts
+Aplicación **web** desarrollada en **React 18** (Create React App) para gestionar marcadores (bookmarks): guardarlos, organizarlos por carpetas, calificarlos y buscarlos fácilmente. Se integra con la **Bookmak API** para operaciones CRUD y autenticación.
 
-In the project directory, you can run:
+> **Estado**: prototipo funcional. La UI y la capa de datos están sujetas a cambios frecuentes.
 
-### `npm start`
+---
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## ✨ Características principales
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+* **Dashboard** con vista de tarjetas y tabla filtrable.
+* **CRUD de marcadores**: título, URL, descripción, etiquetas, puntuación.
+* **Carpetas / categorías** anidadas con recuento de elementos.
+* **Búsqueda rápida** (fuzzy search) y ordenamiento.
+* **UI accesible** basada en **Material UI** y utilidades de **Tailwind CSS**.
+* **Dark / Light mode** con persistencia en `localStorage`.
+* **Llamadas a la Bookmak API** autenticadas (JWT) mediante **Axios**.
 
-### `npm test`
+---
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 🗂️ Tecnologías utilizadas
 
-### `npm run build`
+| Categoría          | Stack                              |
+| ------------------ | ---------------------------------- |
+| **Frontend**       | React 18 · React Router 6 · Axios  |
+| **UI Kit**         | Material UI 5 · Tailwind CSS 3     |
+| **Estado**         | Context API + hooks                |
+| **Build**          | Create React App (react‑scripts 5) |
+| **Lint / Formato** | ESLint · Prettier                  |
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+---
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## 🛠️ Requisitos previos
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+| Herramienta | Versión mínima |
+| ----------- | -------------- |
+| Node.js     | 18.x           |
+| npm         | 9.x            |
 
-### `npm run eject`
+> También puedes usar **pnpm** o **yarn** si lo prefieres.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+---
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## 🚀 Inicio rápido
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```bash
+# 1. Clona el repositorio
+$ git clone https://github.com/TAVI0/bookmark.git
+$ cd bookmark
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+# 2. Instala dependencias
+$ npm install
 
-## Learn More
+# 3. Copia variables de entorno y ajusta valores
+$ cp .env.example .env.local
+# Reemplaza API_URL y JWT_SECRET según tu entorno
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+# 4. Ejecuta en modo desarrollo
+$ npm start
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+# La app quedará disponible en http://localhost:3000
+```
 
-### Code Splitting
+### Variables de entorno
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+```env
+REACT_APP_API_URL=http://localhost:8080/api/v1
+REACT_APP_JWT_STORAGE_KEY=bookmark_token
+```
 
-### Analyzing the Bundle Size
+> **Tip**: en producción define estas variables como *secrets* o variables de entorno en tu plataforma (Vercel, Netlify, etc.).
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+---
 
-### Making a Progressive Web App
+## 📦 Scripts disponibles
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+| Comando         | Descripción                                              |
+| --------------- | -------------------------------------------------------- |
+| `npm start`     | Inicia el servidor de desarrollo con recarga en caliente |
+| `npm run build` | Genera la versión optimizada en `build/`                 |
+| `npm run lint`  | Ejecuta ESLint sobre los archivos fuente                 |
+| `npm run eject` | Expone la configuración de CRA (acción irreversible)     |
 
-### Advanced Configuration
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## 📁 Estructura del proyecto (resumen)
 
-### Deployment
+```
+bookmark/
+├── public/             # estáticos, index.html
+├── src/
+│   ├── api/            # llamadas Axios y hooks
+│   ├── components/     # botones, tarjetas, modales reutilizables
+│   ├── features/       # dominios (bookmarks, folders, auth)
+│   ├── hooks/          # hooks personalizados
+│   ├── pages/          # vistas principales (Home, Login, FolderView)
+│   ├── styles/         # Tailwind y CSS extra
+│   └── App.jsx         # punto de entrada de rutas
+├── tailwind.config.js  # configuración Tailwind
+└── package.json
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+---
