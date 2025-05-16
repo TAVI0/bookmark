@@ -137,10 +137,6 @@ return (
                 <div className="flex justify-between items-center">
                   <div className="flex space-x-4">
                     <Button variant="ghost" className="text-[#8eacbb]">
-                      <MessageCircle className="mr-2 h-4 w-4" />
-                      {post.comments} Comentarios
-                    </Button>
-                    <Button variant="ghost" className="text-[#8eacbb]">
                       <Star className="mr-2 h-4 w-4" />
                       {post.likes} Me gusta
                     </Button>
@@ -151,12 +147,6 @@ return (
                 </div>       
             </div>
           </div>
-        </CardContent>
-      </Card>
-
-      {/* Sección de comentarios */}
-      <Card className="bg-[#1c2026] border-[#677785]/30">
-          <CardContent className="p-6">
             <h3 className="text-2xl font-bold text-[#8eacbb] mb-4">Comentarios</h3>
             <div className="space-y-4">
               {sampleComments.map(comment => (

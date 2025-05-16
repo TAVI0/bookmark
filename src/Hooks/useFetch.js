@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useAuth } from "../App/auth/AuthProvider";
 
-function useFetch(url, dato){
+function usefetch(url, dato){
     const [data, setData] = React.useState(null);
     const [loading, setLoading] = React.useState(true); 
 
@@ -34,4 +34,4 @@ function useFetch(url, dato){
 
   return { data, loading };
 }
-export {useFetch}
+export {usefetch}
