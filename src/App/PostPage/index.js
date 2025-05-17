@@ -162,34 +162,3 @@ return (
 )
 }
 export { PostPage }
-
-
-    /*
-    return(
-        <>
-            <div className="book">
-                <img className="logoBook"  src ="/logobook.png" alt="logo libro"/>
-            </div>
-
-            <div className="post">
-                <h6>
-                    Review by {post.userEntity.username}
-                </h6>
-                <div>
-                    <h1 className="tittle">{book.name}</h1>
-                    <div className="stars">
-                        {completedStars}{halfStar}
-                    </div>
-                </div>
-                <div className="review">
-                    {spoilerView ? (
-                        <p onClick={handleClick}>SPOILERS!!! Click aqui para continuar</p>
-                    ) : (
-                        post.review
-                    )}
-                </div>
-            </div>
-
-        </>
-    )
-*/
