@@ -31,7 +31,7 @@ export default function useFetch(endpoint = '', dato = '') {
             setLoading(false);
             });
         }
-    }, [API, endpoint, dato]);   // ← incluye API y endpoint como deps
+    }, [API_URL, endpoint, dato]);   // ← incluye API y endpoint como deps
 
     return { data, loading };
     }
