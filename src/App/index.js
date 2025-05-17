@@ -8,8 +8,8 @@ import { SettingsPage } from '../SettingsPage/index.js';
 import { HeaderNav } from '../HeaderNav/index.js';
 import { ProtectedRoute } from '../ProtectedRoute/index.js';
 import { AuthProvider } from './auth/AuthProvider.js';
-import { PostPage } from './PostPage/index.js';
-import { HomePage } from './HomePage/index.js';
+import { PostPage } from '../PostPage/index.js';
+import { HomePage } from '../HomePage/index.js';
 import { FooterComponent } from './FooterComponent/index.jsx';
 
 
