@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import auth from '../utils/auth';  
 
-export default function usefetch(endpoint = '', dato = '') {
+export default function useFetch(endpoint = '', dato = '') {
     const [data, setData]       = useState(null);
     const [loading, setLoading] = useState(false);
 
