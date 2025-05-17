@@ -3,7 +3,7 @@ import { Button } from '../components/ui/button';
 import { useAuth } from '../App/auth/AuthProvider';
 import React from 'react';
 import { BookContext } from '../BookContext';
-import { LogoutModal } from '../../Modals/LogoutModal';
+import { LogoutModal } from '../Modals/LogoutModal/index.js';
 
 
 function FooterComponent(){
