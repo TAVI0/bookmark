@@ -8,7 +8,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "../../components/ui/avatar"
 import { Button } from "../../components/ui/button";
 import { Card, CardContent } from "../../components/ui/card";
 import { Star, MessageCircle, Share2, Bookmark, ChevronLeft } from 'lucide-react'
-import { postService } from "../../services/postService";
+import { postService } from "../../services/postService.ts";
 const sampleComments = [
   { id: 1, user: { username: 'Lector1', avatar: '/placeholder.svg?height=40&width=40' }, content: 'Totalmente de acuerdo. Este libro me mantuvo despierto toda la noche.', date: '2023-05-15' },
   { id: 2, user: { username: 'Crítico2', avatar: '/placeholder.svg?height=40&width=40' }, content: 'Interesante perspectiva. Aunque creo que el ritmo decae un poco en la mitad.', date: '2023-05-16' },
