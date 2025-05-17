@@ -10,7 +10,7 @@ import { ProtectedRoute } from '../ProtectedRoute/index.js';
 import { AuthProvider } from './auth/AuthProvider.js';
 import { PostPage } from '../PostPage/index.js';
 import { HomePage } from '../HomePage/index.js';
-import { FooterComponent } from './FooterComponent/index.jsx';
+import { FooterComponent } from '../FooterComponent/index.js';
 
 
 function App() {
