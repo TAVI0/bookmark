@@ -1,8 +1,8 @@
 import { BookOpen, Search, Star, List, Settings, LogOut } from 'lucide-react'
-import { Button } from '../../components/ui/button'
-import { useAuth } from '../auth/AuthProvider';
+import { Button } from '../components/ui/button';
+import { useAuth } from '../App/auth/AuthProvider';
 import React from 'react';
-import { BookContext } from '../../BookContext';
+import { BookContext } from '../BookContext';
 import { LogoutModal } from '../../Modals/LogoutModal';
 
 
