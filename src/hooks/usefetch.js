@@ -28,6 +28,8 @@ export default function useFetch(endpoint = '', dato = '') {
             })
             .catch(err => {
             console.error('Error al obtener los datos:', err);
+            console.error('data:', API_URL + endpoint + dato);
+
             setLoading(false);
             });
         }
