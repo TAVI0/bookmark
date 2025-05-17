@@ -1,5 +1,4 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
-//import { API_URL } from "../../dataApp";
 
 const AuthContext = createContext({
     isAuthenticated:false,

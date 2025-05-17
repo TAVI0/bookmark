@@ -2,7 +2,6 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { BookContext } from "../../BookContext";
 import { useAuth } from "../../App/auth/AuthProvider";
-//import { API_URL } from "../../dataApp";
 import { useNavigate } from "react-router-dom";
 
 function LoginModal() {

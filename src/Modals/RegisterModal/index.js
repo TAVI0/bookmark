@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BookContext } from '../../BookContext';
-//import { API_URL } from '../../dataApp';
 import { useNavigate } from 'react-router-dom';
 
 function RegisterModal(){

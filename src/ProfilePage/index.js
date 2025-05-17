@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import './ProfilePage.css'
-import { useFetch } from "../hooks/usefetch";
+import { useFetch } from "../hooks/useFetch";
 import { GETUSERBYUSERNAME } from "../dataApp";
 function ProfilePage(){
     
