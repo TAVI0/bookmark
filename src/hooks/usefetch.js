@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react';
-import auth from '../utils/auth';  
+import { useAuth } from "../App/auth/AuthProvider";
+
 
 export default function useFetch(endpoint = '', dato = '') {
     const [data, setData]       = useState(null);
     const [loading, setLoading] = useState(false);
+    const auth = useAuth();
 
-  // 🔑 lee la base una sola vez
+
     const API_URL = process.env.REACT_APP_API_URL ?? '';
 
     useEffect(() => {
