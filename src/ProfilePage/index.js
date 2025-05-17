@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import './ProfilePage.css'
 import { userService } from "../services/userService.ts";
+import { useEffect, useState } from "react";
 
 function ProfilePage(){
     
