@@ -25,11 +25,12 @@ export function AuthProvider({ children }) {
             const token = getAuthToken();
             if(token!=='null'){
                 try{
-                    fetch(`${API_URL}auth/getUserByJWT/${token}`, {
-                        method: 'GET'
-                        ,headers: {
-                            'Content-Type': 'application/json',
-                        }
+                    fetch(`${API_URL}/auth/getUserByJWT`, {       
+                        method: 'GET',
+                        headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`,
+                        },
                     })
                     .then(response => response.text())
                     .then((data) => {

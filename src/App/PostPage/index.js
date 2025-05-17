@@ -8,6 +8,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "../../components/ui/avatar"
 import { Button } from "../../components/ui/button";
 import { Card, CardContent } from "../../components/ui/card";
 import { Star, MessageCircle, Share2, Bookmark, ChevronLeft } from 'lucide-react'
+import { postService } from "../services/postService"; 
 const sampleComments = [
   { id: 1, user: { username: 'Lector1', avatar: '/placeholder.svg?height=40&width=40' }, content: 'Totalmente de acuerdo. Este libro me mantuvo despierto toda la noche.', date: '2023-05-15' },
   { id: 2, user: { username: 'Crítico2', avatar: '/placeholder.svg?height=40&width=40' }, content: 'Interesante perspectiva. Aunque creo que el ritmo decae un poco en la mitad.', date: '2023-05-16' },
@@ -16,45 +17,32 @@ const sampleComments = [
 function PostPage(){
 
     const { username, postName } = useParams();
-    const API = process.env.REACT_APP_API_URL ?? '';
-
     const postNameStr = postName.replace(/-+/g, ' ');
     const [post, setPost] = useState();
-    const [loading, setLoading] = React.useState(true);
+    const [loading, setLoading] = useState(true);
     const [spoilerView, setSpoilerView] = useState(true);
 
-    useEffect(() => {
-        if (!username || !postNameStr) return;
+  useEffect(() => {
+    if (!username || !postName) return;
 
-        setLoading(true);
-        const url=`${API}/post/${username}/${postName}/1`;
-        fetch(url,{
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-            }
-        })
-        .then(response => response.json())
-        .then((data) => {
-            setPost(data);
-            setLoading(false);
-            setSpoilerView(data.spoiler); 
-            console.log(data);
-        })
-        .catch(error => {
-            console.error("Error al obtener los datos:", error);
-            setLoading(false);
-        });
-    }, [username, postNameStr]);
+    setLoading(true);
+    postService
+      .getByPath(username, postName, 1)
+      .then(data => {
+        setPost(data);
+        setSpoilerView(data.spoiler);
+      })
+      .catch(err => {
+        console.error('Error al obtener los datos:', err);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }, [username, postName]);
     
-    
-    const {
-        starsSistem,
-    } = React.useContext(BookContext);
-    
-    if (loading) {
-        return <p>Cargando...</p>;
-    }
+  const { starsSistem } = useContext(BookContext);
+  if (loading || !post) return <p>Cargando…</p>;
+
     
     console.log(post)
     const book = post.book;
