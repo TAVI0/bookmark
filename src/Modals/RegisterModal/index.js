@@ -1,13 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BookContext } from '../../BookContext';
-import { API_URL } from '../../dataApp';
+//import { API_URL } from '../../dataApp';
 import { useNavigate } from 'react-router-dom';
 
 function RegisterModal(){
     const [username, setUsername] = React.useState('');
     const [password, setPassword] = React.useState('');
     const {setOpenRegisterModal} = React.useContext(BookContext);
+    const API_URL = process.env.REACT_APP_API_URL ?? '';
 
     const goTo = useNavigate();
 

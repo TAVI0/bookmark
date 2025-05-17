@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
-import { API_URL } from "../../dataApp";
+//import { API_URL } from "../../dataApp";
 
 const AuthContext = createContext({
     isAuthenticated:false,
@@ -13,7 +13,8 @@ export function AuthProvider({ children }) {
     const [isAuthenticated, setIsAuthenticated] = useState(false); // Ajusta el valor inicial según tus necesidades
     const [accessToken, setAccessToken] = useState()
     const [userLogin, setUserLogin] = useState()
-    
+    const API_URL = process.env.REACT_APP_API_URL ?? '';
+  
     useEffect(()=> {
         checkAuth()
     },[]);

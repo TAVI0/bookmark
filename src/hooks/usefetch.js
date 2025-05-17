@@ -1,37 +1,36 @@
-import React, { useEffect } from "react";
-import { useAuth } from "../App/auth/AuthProvider";
+import { useEffect, useState } from 'react';
+import auth from '../utils/auth';  
 
-function useFetch(url, dato){
-    const [data, setData] = React.useState(null);
-    const [loading, setLoading] = React.useState(true); 
+export default function usefetch(endpoint = '', dato = '') {
+    const [data, setData]       = useState(null);
+    const [loading, setLoading] = useState(false);
 
-    const auth = useAuth();
+  // 🔑 lee la base una sola vez
+    const API_URL = process.env.REACT_APP_API_URL ?? '';
 
     useEffect(() => {
-        if (dato != null) {
-            setLoading(true);
-            fetch(`${url}${dato}`, {
-                method: 'GET'
-                
-                ,headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer `+ auth.getAccessToken()
-                }
-                
+        if (dato !== null && dato !== undefined) {
+        setLoading(true);
+
+        fetch(`${API_URL}${endpoint}${dato}`, {
+            method: 'GET',
+            headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${auth.getAccessToken()}`,
+            },
+        })
+            .then(r => r.json())
+            .then(json => {
+            setData(json);
+            setLoading(false);
             })
-            .then(response => response.json())
-            .then((data) => {
-                setData(data);
-                setLoading(false);
-            })
-            .catch(error => {
-                console.error("Error al obtener los datos:", error);
-                setLoading(false);
+            .catch(err => {
+            console.error('Error al obtener los datos:', err);
+            setLoading(false);
             });
         }
-}, [dato, url]); // Dependencias actualizadas para que se ejecute cuando `dato` o `url` cambien
+    }, [API, endpoint, dato]);   // ← incluye API y endpoint como deps
 
-
-  return { data, loading };
-}
+    return { data, loading };
+    }
 export {useFetch}

@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { BookContext } from "../../BookContext";
 import { useAuth } from "../../App/auth/AuthProvider";
-import { API_URL } from "../../dataApp";
+//import { API_URL } from "../../dataApp";
 import { useNavigate } from "react-router-dom";
 
 function LoginModal() {
@@ -14,6 +14,7 @@ function LoginModal() {
 
   const auth = useAuth();
 
+  const API_URL = process.env.REACT_APP_API_URL ?? '';
 
   async function handleSubmit(e){
     e.preventDefault();

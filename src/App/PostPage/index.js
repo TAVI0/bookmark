@@ -16,6 +16,7 @@ const sampleComments = [
 function PostPage(){
 
     const { username, postName } = useParams();
+    const API = process.env.REACT_APP_API_URL ?? '';
 
     const postNameStr = postName.replace(/-+/g, ' ');
     const [post, setPost] = useState();
@@ -26,7 +27,7 @@ function PostPage(){
         if (!username || !postNameStr) return;
 
         setLoading(true);
-        const url=`http://localhost:8080/post/${username}/${postName}/1`;
+        const url=`${API}/post/${username}/${postName}/1`;
         fetch(url,{
             method: 'GET',
             headers: {

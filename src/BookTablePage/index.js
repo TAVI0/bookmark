@@ -7,7 +7,7 @@ import "./index.css"
 function BookTablePage () {
     const { username } = useParams();
 
-    const {data:posts, loading} = useFetch("http://localhost:8080/post/username/",username);
+    const {data:posts, loading} = useFetch("/post/username/",username);
 
 
     if (loading) {
