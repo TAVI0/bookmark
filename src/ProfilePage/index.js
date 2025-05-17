@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import './ProfilePage.css'
 import { GETUSERBYUSERNAME } from "../dataApp";
 import useFetch from "../hooks/useFetch";
+
 function ProfilePage(){
     
     const { username } = useParams();
