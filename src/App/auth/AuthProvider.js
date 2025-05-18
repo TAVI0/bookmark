@@ -25,7 +25,7 @@ export function AuthProvider({ children }) {
             const token = getAuthToken();
             if(token!=='null'){
                 try{
-                    fetch(`${API_URL}/auth/getUserByJWT`, {       
+                    fetch(`${API_URL}auth/getUserByJWT`, {       
                         method: 'GET',
                         headers: {
                         'Content-Type': 'application/json',
