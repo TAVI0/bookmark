@@ -1,12 +1,12 @@
-import { BookContext } from '../BookContext';
+import { BookContext } from '../../BookContext';
 import { NavLink, useNavigate } from 'react-router-dom';
 import React from 'react';
-import { AddBookModal } from '../Modals/addBookModal';
-import { LoginModal } from '../Modals/LoginModal';
-import { RegisterModal } from '../Modals/RegisterModal';
-import { useAuth } from '../App/auth/AuthProvider';
-import { Input } from '../components/ui/input';
-import { Avatar, AvatarFallback } from '../components/ui/avatar';
+import { AddBookModal } from '../../Modals/addBookModal';
+import { LoginModal } from '../../Modals/LoginModal';
+import { RegisterModal } from '../../Modals/RegisterModal';
+import { useAuth } from '../../App/auth/AuthProvider';
+import { Input } from '../ui/input';
+import { Avatar, AvatarFallback } from '../ui/avatar';
 import { Bell } from 'lucide-react';
 import { AvatarImage } from '@radix-ui/react-avatar';
 

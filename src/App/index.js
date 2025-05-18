@@ -5,12 +5,12 @@ import { BookTablePage } from '../pages/BookTablePage/index.js';
 import { BookProvider } from '../BookContext/index.js';
 import { SettingsPage } from '../pages/SettingsPage/index.js';
 
-import { HeaderNav } from '../HeaderNav/index.js';
+import { HeaderNav } from '../components/HeaderNav/index.js';
 import { ProtectedRoute } from './ProtectedRoute/index.js';
 import { AuthProvider } from './auth/AuthProvider.js';
 import { PostPage } from '../pages/PostPage/index.js';
 import { HomePage } from '../pages/HomePage/index.js';
-import { FooterComponent } from '../FooterComponent/index.jsx';
+import { FooterComponent } from '../components/FooterComponent/index.jsx';
 
 
 function App() {

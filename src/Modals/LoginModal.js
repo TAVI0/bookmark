@@ -62,7 +62,7 @@ function LoginModal() {
         {error && <p className="error">{error}</p>}
 
         <div className="Form-buttonContainer">
-          <button className="Form-button Form-button--cancel" onClick={onCancel}>
+          <button type="button" className="Form-button Form-button--cancel" onClick={onCancel}>
             Cancelar
           </button>
           <button className="Form-button Form-button--add" type="submit">
