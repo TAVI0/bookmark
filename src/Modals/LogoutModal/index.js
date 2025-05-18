@@ -1,41 +1,48 @@
+// src/Modals/LogoutModal/index.js
+
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BookContext } from '../../BookContext';
-import { setAuthToken, useAuth } from '../../App/auth/AuthProvider';
 import { useNavigate } from 'react-router-dom';
+import { BookContext } from '../../BookContext';
+import { useAuth } from '../../App/auth/AuthProvider';
 
-function LogoutModal(){
-    const goTo = useNavigate();
+export function LogoutModal() {
+  const navigate = useNavigate();
+  const auth     = useAuth();
+  const { setOpenLogoutModal } = React.useContext(BookContext);
 
-    const auth = useAuth();
-    const { setOpenLogoutModal } = React.useContext(BookContext);
-    const logout = (e) => {
-        e.preventDefault();
-        setOpenLogoutModal(false);
-        auth.setUserLogin("");
-        auth.setIsAuthenticated(false);
-        window.localStorage.setItem("auth_token", null);
-        setAuthToken(null)
-        goTo('/');
-    };
+  const handleLogout = (e) => {
+    e.preventDefault();
+    // Cierra el modal
+    setOpenLogoutModal(false);
+    // Limpia el auth (token, user, estado)
+    auth.logout();
+    // Redirige al home
+    navigate('/');
+  };
 
-    const onCancel = (event) => {
-        event.preventDefault();
-        setOpenLogoutModal(false);
-    };
+  const handleCancel = (e) => {
+    e.preventDefault();
+    setOpenLogoutModal(false);
+  };
 
-    return ReactDOM.createPortal(
-        <div className='ModalBackground'>
-        <form className="Form-buttonContainer" onSubmit={logout}>
+  return ReactDOM.createPortal(
+    <div className="ModalBackground">
+      <form className="Form-buttonContainer" onSubmit={handleLogout}>
         <label>Logout</label>
-            <label>¿Seguro que quieres salir?</label>
-            <button className="Form-button Form-button--add" type='submit'>SALIR</button>       
-            <button className="Form-button Form-button--cancel" type="button" onClick={onCancel}>Cancelar</button>         
-        </form>
+        <label>¿Seguro que quieres salir?</label>
+        <button className="Form-button Form-button--add" type="submit">
+          SALIR
+        </button>
+        <button
+          className="Form-button Form-button--cancel"
+          type="button"
+          onClick={handleCancel}
+        >
+          Cancelar
+        </button>
+      </form>
     </div>,
-        document.getElementById('modal')
-    )
-
+    document.getElementById('modal')
+  );
 }
-
-export { LogoutModal };
