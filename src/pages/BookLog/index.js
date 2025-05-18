@@ -1,8 +1,8 @@
 import React from "react";
 import { AiFillEdit } from 'react-icons/ai';
-import { GrTextAlignFull } from 'react-icons/gr';
+import { GrTextAlignFull } from 'react-icons/gr'; 
 import { BsFillSuitHeartFill} from 'react-icons/bs';
-import { BookContext } from '../BookContext';
+import { BookContext } from "../../BookContext";
 import './index.css'
 import { NavLink } from "react-router-dom";
 

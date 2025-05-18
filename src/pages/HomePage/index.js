@@ -1,9 +1,9 @@
-import { Avatar, AvatarFallback, AvatarImage } from '../components/ui/avatar'  
-import { Button } from '../components/ui/button'
-import { Card, CardContent } from '../components/ui/card'
+import { Avatar, AvatarFallback, AvatarImage } from '../../components/ui/avatar'  
+import { Button } from '../../components/ui/button'
+import { Card, CardContent } from '../../components/ui/card'
 import { BookOpen, Search, Star, List, Bell, Settings, LogOut } from 'lucide-react'
 
-import { useAuth } from '../App/auth/AuthProvider'
+import { useAuth } from '../../App/auth/AuthProvider'
 
 export default function HomePage() {
   const auth = useAuth();

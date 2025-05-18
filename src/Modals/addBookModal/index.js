@@ -1,18 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import ReactDOM from "react-dom";
 import "./Modal.css";
-import { StarsBar } from "../../StarsBar";
+import { StarsBar } from "../../components/StarsBar";
 import { BookContext } from "../../BookContext";
-import { POSTPOST } from "../../dataApp";
-import axios from "axios";
-
+import { postService } from "../../services/postService.ts"; 
+import { useAuth } from "../../App/auth/AuthProvider";
 function AddBookModal() {
-  const { setOpenAddBookModal } = React.useContext(BookContext);
- // const auth = useAuth();
+  const { setOpenAddBookModal, currentBookId, onPostAdded } = useContext(BookContext);
+  const auth = useAuth();
   const [post, setPost] = useState({
-    idUser: 1,//auth.user.id,
-    idBook: 3,
-    datePost: new Date(),
+    idUser: auth.user.id,
+    idBook: currentBookId,
+    dateStart: new Date().toISOString().split("T")[0],
+    dateEnd: "",
     review: "",
     rated: 0,
     spoiler: false,
@@ -20,65 +20,122 @@ function AddBookModal() {
     readBefore: false,
   });
 
-  const onSubmit = async (event) => {
-    event.preventDefault();
-    console.log(post);
+  const onSubmit = async (e) => {
+    e.preventDefault();
     try {
-      const response = await axios.post(POSTPOST, post);
-      console.log("Respuesta del servidor:", response.data);
-      // Realiza acciones adicionales con la respuesta
-    } catch (error) {
-      console.error("Error al realizar la solicitud:", error);
+      const created = await postService.save(post);
+      console.log("Post creado:", created);
+      // si quieres refrescar la lista tras crearlo:
+      onPostAdded(created);
+      setOpenAddBookModal(false);
+    } catch (err) {
+      console.error("Error al crear post:", err);
     }
-    setOpenAddBookModal(false);
   };
 
-  const handleInput = (event) => {
-    setPost({ ...post, [event.target.className]: event.target.value });
-  };
-  const handleBooleanInput = (event) => {
-    setPost({ ...post, [event.target.className]: event.target.checked });
+  const handleChange = (e) => {
+    const { className, type, value, checked } = e.target;
+    setPost(prev => ({
+      ...prev,
+      [className]: type === "checkbox" ? checked : value,
+    }));
   };
 
-  const onCancel = (event) => {
-    event.preventDefault();
+  const onCancel = (e) => {
+    e.preventDefault();
     setOpenAddBookModal(false);
   };
 
   return ReactDOM.createPortal(
     <div className="ModalBackground">
-      <form onSubmit={onSubmit}>
-        <label>ADD TO YOUR BOOKS...</label>
-          <input className="name" type="text" placeholder="Nacidos de la bruma"/>
-        <div>
-          <input className="datePost" type="date" onChange={handleInput}/>
-          <input className="endDate" type="date"/>
+      <form onSubmit={onSubmit} className="ModalForm">
+        <h2>Agregar a tu estantería</h2>
+
+        <div className="ModalField">
+          <label>Fecha de inicio</label>
+          <input
+            className="dateStart"
+            type="date"
+            value={post.dateStart}
+            onChange={handleChange}
+          />
         </div>
-        <textarea className="review" onChange={handleInput} placeholder="Escribi tu review aqui..."/>
-        <div>
-          Rated
-          <input className="rated" type="number" onChange={handleInput}/>
+
+        <div className="ModalField">
+          <label>Fecha de fin</label>
+          <input
+            className="dateEnd"
+            type="date"
+            value={post.dateEnd}
+            onChange={handleChange}
+          />
         </div>
-        <div>
-          Spoiler
-          <input className="spoiler" type="checkbox" onChange={handleBooleanInput}/>
+
+        <div className="ModalField">
+          <label>Reseña</label>
+          <textarea
+            className="review"
+            value={post.review}
+            onChange={handleChange}
+            placeholder="Escribí tu review aquí..."
+          />
         </div>
-        <div>
-          ReadBefore
-          <input className="readBefore" type="checkbox" onChange={handleBooleanInput}/>
+
+        <div className="ModalField">
+          <label>Calificación</label>
+          <input
+            className="rated"
+            type="number"
+            min="0"
+            max="5"
+            value={post.rated}
+            onChange={handleChange}
+          />
         </div>
-        <div>
-          Liked
-          <input className="liked" type="checkbox" onChange={handleBooleanInput}/>
+
+        <div className="ModalSwitches">
+          <label>
+            <input
+              className="spoiler"
+              type="checkbox"
+              checked={post.spoiler}
+              onChange={handleChange}
+            /> Contiene spoiler
+          </label>
+          <label>
+            <input
+              className="readBefore"
+              type="checkbox"
+              checked={post.readBefore}
+              onChange={handleChange}
+            /> Lo había leído antes
+          </label>
+          <label>
+            <input
+              className="liked"
+              type="checkbox"
+              checked={post.liked}
+              onChange={handleChange}
+            /> Me gustó
+          </label>
         </div>
-        <div>
-          <StarsBar />
+
+        <div className="ModalField">
+          <StarsBar rating={post.rated} onChange={(val) => setPost(prev => ({ ...prev, rated: val }))} />
         </div>
+
         <div className="Form-buttonContainer">
-          <button className="Form-button Form-button--cancel" type="button" onClick={onCancel}>
+          <button
+            className="Form-button Form-button--cancel"
+            type="button"
+            onClick={onCancel}
+          >
             Cancelar
           </button>
-          <button className="Form-button Form-button--add" type="submit">
+          <button
+            className="Form-button Form-button--add"
+            type="submit"
+          >
             Añadir
           </button>
         </div>

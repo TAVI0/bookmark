@@ -1,7 +1,6 @@
-// src/context/AuthProvider.js
-
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { authService } from "../../services/authService.ts";
+import { userService } from "../../services/userService.ts";
 
 const AuthContext = createContext({
   isAuthenticated: false,
@@ -11,53 +10,50 @@ const AuthContext = createContext({
   setIsAuthenticated: () => {},
   logout: () => {},
 });
-
 export function AuthProvider({ children }) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [accessToken, setAccessToken]       = useState(() => window.localStorage.getItem("auth_token"));
-  const [userLogin, setUserLogin]           = useState(null);
+  const [accessToken,   setAccessToken]   = useState(() =>
+    window.localStorage.getItem("auth_token")
+  );
+  const [user,           setUser]         = useState(null);
 
-  // Al montar, comprobamos si hay token y traemos el usuario
   useEffect(() => {
     const token = window.localStorage.getItem("auth_token");
-    if (token) {
-      // guardamos en estado para que getAccessToken lo devuelva
-      setAccessToken(token);
-      // pedimos al backend el usuario
-      authService.getUserByJWT(token)
-        .then(username => {
-          setUserLogin(username);
-          setIsAuthenticated(true);
-        })
-        .catch(err => {
-          console.error("checkAuth error:", err);
-          clearAuth();
-        });
-    }
+    if (!token) return;
+
+    setAccessToken(token);
+    // 1️⃣ Primero obtengo el username desde el JWT
+    authService
+      .getUserByJWT(token)            // devuelve un string: "miUsuario"
+      .then((username) => {
+        // 2️⃣ Luego pido el objeto completo al userService
+        return userService.getByUsername(username);
+      })
+      .then((fullUserObj) => {
+        // fullUserObj debería tener { id, username, description, … }
+        setUser(fullUserObj);
+        setIsAuthenticated(true);
+      })
+      .catch((err) => {
+        console.error("Auth check error:", err);
+        clearAuth();
+      });
   }, []);
 
-  // Guarda token y username tras hacer login
-  function saveUser({ token, username }) {
+  function saveUser({ token, id, username }) {
     window.localStorage.setItem("auth_token", token);
     setAccessToken(token);
-    setUserLogin(username);
+    setUser({ id, username });
     setIsAuthenticated(true);
   }
 
-  // Recupera el token en cualquier parte
-  function getAccessToken() {
-    return accessToken;
-  }
-
-  // Borra todo al hacer logout o cuando el token es inválido
   function clearAuth() {
     window.localStorage.removeItem("auth_token");
     setAccessToken(null);
-    setUserLogin(null);
+    setUser(null);
     setIsAuthenticated(false);
   }
 
-  // Función pública para desloguear
   function logout() {
     clearAuth();
   }
@@ -66,11 +62,10 @@ export function AuthProvider({ children }) {
     <AuthContext.Provider
       value={{
         isAuthenticated,
-        userLogin,
-        getAccessToken,
+        user,
         saveUser,
-        setIsAuthenticated,
         logout,
+        // …
       }}
     >
       {children}

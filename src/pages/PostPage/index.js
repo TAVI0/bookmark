@@ -1,14 +1,14 @@
 import React, { useContext, useEffect, useState } from "react";
-import { BookContext } from "../BookContext/index.js";
+import { BookContext } from "../../BookContext/index.js";
 import { BsFillSuitHeartFill } from "react-icons/bs";
 import { GrTextAlignFull } from "react-icons/gr";
 import { useParams } from "react-router-dom";
 import './index.css'
-import { Avatar, AvatarFallback, AvatarImage } from "../components/ui/avatar.jsx";
-import { Button } from "../components/ui/button.jsx";
-import { Card, CardContent } from "../components/ui/card.jsx";
+import { Avatar, AvatarFallback, AvatarImage } from "../../components/ui/avatar.jsx";
+import { Button } from "../../components/ui/button.jsx";
+import { Card, CardContent } from "../../components/ui/card.jsx";
 import { Star, MessageCircle, Share2, Bookmark, ChevronLeft } from 'lucide-react'
-import { postService } from "../services/postService.ts";
+import { postService } from "../../services/postService.ts";
 const sampleComments = [
   { id: 1, user: { username: 'Lector1', avatar: '/placeholder.svg?height=40&width=40' }, content: 'Totalmente de acuerdo. Este libro me mantuvo despierto toda la noche.', date: '2023-05-15' },
   { id: 2, user: { username: 'Crítico2', avatar: '/placeholder.svg?height=40&width=40' }, content: 'Interesante perspectiva. Aunque creo que el ritmo decae un poco en la mitad.', date: '2023-05-16' },

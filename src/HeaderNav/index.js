@@ -50,13 +50,13 @@ function HeaderNav() {
               </Avatar>
               <NavLink
                 className="text-[#99aabb] hover:text-[#8eacbb]"
-                to={`/${auth.userLogin}`}
+                to={`/${auth.user.username}`}
               >
                 {auth.userLogin}
               </NavLink>
               <NavLink
                 className="text-[#99aabb] hover:text-[#8eacbb]"
-                to={`/${auth.userLogin}/books`}
+                to={`/${auth.user.username}/books`}
               >
                 Books
               </NavLink>
