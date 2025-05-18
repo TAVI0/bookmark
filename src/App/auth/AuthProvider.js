@@ -1,84 +1,68 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
 
-const AuthContext = createContext({
-    isAuthenticated:false,
-    userLogin:"",
-    getAccessToken: ()=>{},
-    saveUser:()=>{},
-    setIsAuthenticated: ()=>{},
+import React, { createContext, useState, useEffect } from 'react';
+import { authService } from '../../services/authService.js'; 
+
+export const AuthContext = createContext({
+  user: null,
+  loading: false,
+  login: async () => {},
+  logout: () => {}
 });
 
 export function AuthProvider({ children }) {
-    const [isAuthenticated, setIsAuthenticated] = useState(false); // Ajusta el valor inicial según tus necesidades
-    const [accessToken, setAccessToken] = useState()
-    const [userLogin, setUserLogin] = useState()
-    const API_URL = process.env.REACT_APP_API_URL ?? '';
-  
-    useEffect(()=> {
-        checkAuth()
-    },[]);
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-    async function checkAuth(){
-        if(accessToken){
-            setIsAuthenticated(true);
-        }else{
-            const token = getAuthToken();
-            if(token!=='null'){
-                try{
-                    fetch(`${API_URL}auth/getUserByJWT`, {       
-                        method: 'GET',
-                        headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${token}`,
-                        },
-                    })
-                    .then(response => response.text())
-                    .then((data) => {
-                        setUserLogin(data);
-                    })
-                }catch{
-                    console.log("error");
-                }
-                setIsAuthenticated(true);
-            }else{
-                setIsAuthenticated(false);
-            }
-        }
+  // Al montar, chequeamos si hay JWT en localStorage
+  useEffect(() => {
+    const token = localStorage.getItem('jwtToken');
+    if (!token) {
+      setLoading(false);
+      return;
     }
 
-    useEffect(() => {
-        console.log("isAuthenticated changed: " + isAuthenticated);
-    }, [isAuthenticated]);
+    authService.getUserByJWT(token)
+      .then(userData => {
+        setUser(userData);
+      })
+      .catch(err => {
+        console.error('Error validando token:', err);
+        localStorage.removeItem('jwtToken');
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }, []);
 
-    useEffect(() => {
-        console.log("userLogin changed: " + userLogin);
-    }, [userLogin]);
+  // Función de login expuesta en el contexto
+  const login = async ({ username, password }) => {
+    setLoading(true);
+    try {
+      const response = await authService.login({ username, password });
+      // asumo que viene { token, ... }
+      const token = response.token;
+      localStorage.setItem('jwtToken', token);
 
-    function getAccessToken(){
-        return accessToken;
+      const userData = await authService.getUserByJWT(token);
+      setUser(userData);
+
+      return userData;
+    } catch (err) {
+      throw err;
+    } finally {
+      setLoading(false);
     }
+  };
 
-    function getAuthToken(){
-        return window.localStorage.getItem("auth_token");
-    }
+  // Función de logout
+  const logout = () => {
+    localStorage.removeItem('jwtToken');
+    setUser(null);
+  };
 
-    function saveUser(userData){
-        setAccessToken(userData.token);
-        setIsAuthenticated(true);
-        setUserLogin(userData.username);
-        return window.localStorage.setItem("auth_token", userData.token);
-
-    }
-    
-    return (
-        <AuthContext.Provider value={{ isAuthenticated, setIsAuthenticated, getAccessToken, saveUser, userLogin, setUserLogin }}>
-            {children}
-        </AuthContext.Provider>
-    );
+  return (
+    <AuthContext.Provider value={{ user, loading, login, logout }}>
+      {children}
+    </AuthContext.Provider>
+  );
 }
-export const useAuth = () => useContext(AuthContext);
-
-export const setAuthToken = (token) => {    
-    return window.localStorage.setItem("auth_token", token);
-}
-
