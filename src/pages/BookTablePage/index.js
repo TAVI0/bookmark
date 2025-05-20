@@ -31,24 +31,24 @@ function BookTablePage() {
   }, [username]);
 
   if (loading) {
-    return <p>Cargando...</p>;
+    return <p className="loading">Cargando...</p>;
   }
 
   return (
-    <>
-      <table>
+    <div className="table-container">
+      <table className="book-table">
         <thead>
-          <tr className="header">
-            <th>img</th>
-            <th>Book</th>
+          <tr>
+            <th>Portada</th>
+            <th>Título</th>
             <th>Autor</th>
-            <th>start</th>
+            <th>Inicio</th>
             <th>-</th>
-            <th>end</th>
+            <th>Fin</th>
             <th>Rating</th>
-            <th>Review</th>
+            <th>Reseña</th>
             <th>Like</th>
-            <th>Edit</th>
+            <th>Editar</th>
           </tr>
         </thead>
         <tbody>
@@ -58,12 +58,14 @@ function BookTablePage() {
             ))
           ) : (
             <tr>
-              <td colSpan="10">No hay entradas para este usuario.</td>
+              <td colSpan="10" className="no-data">
+                No hay entradas para este usuario.
+              </td>
             </tr>
           )}
         </tbody>
       </table>
-    </>
+    </div>
   );
 }
 

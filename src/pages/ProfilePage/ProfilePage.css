@@ -1,70 +1,157 @@
-body{    
-    background-color: #1d242b;
+/* 1) Fondo global de toda la página */
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background-color: #14171c;
 }
 
-.Profile{
-    color: #ffffff;
-    display: flex;
-    justify-content: space-between;
-    margin: 3% 15%;
-    
+/* 2) Contenedor full-width / full-height */
+.Profile {
+  width: 100%;
+  min-height: 100vh;         /* ocupa toda la altura de la ventana */
+  padding: 2rem 1rem;        /* espacio interno */
+  background-color: #1d242c; /* fondo de la “sección” */
+  box-shadow: none;          /* quitá la sombra */
+  border-radius: 0;          /* sin esquinas redondeadas */
+  color: #dde2e8;
+  font-family: sans-serif;
+  box-sizing: border-box;
 }
 
-.Profile-details{
-    display: flex;
-    align-items: center;
+/* Loading y not-found */
+.loading,
+.not-found {
+  text-align: center;
+  color: #99aabb;
+  padding: 2rem;
 }
-.Profile-details-text{
-    margin: 0 5%;
+
+/* Detalles de perfil */
+.Profile-details {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
 }
-.avatar{
-    border-radius:50%;
-    width: 25%;
+
+.avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #99aabb;
 }
-.Username{
-    font-weight: bold;
+
+.Profile-details-text .Username {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 0.5rem;
 }
-.Description{
-    color: #667788;
-    font-size: 0.8rem;
-    white-space: nowrap;
-    padding: 5% 0;
+
+.Profile-details-text .Description {
+  color: #ccd6dd;
+  margin-bottom: 0.5rem;
 }
-.Twitter{
-    display: flex;
-    align-items: center;
-    color: #667788;
-    font-size: 0.8rem;
+
+/* Sección Twitter */
+.Twitter {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
 }
-.Twitter-logo{
-    font-size: 1.5rem;
-    padding-right: 3%;
+
+.Twitter-logo {
+  font-size: 1.2rem;
+  color: #1da1f2;
 }
-.Stats{
-    display: flex;
-    align-items: center;
-    padding: 0 10%;
+
+.Twitter-value {
+  color: #99aabb;
+}
+
+/* Estadísticas */
+.Stats {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 2rem;
 }
 
 .Stats-block {
-    border-left: 1px solid #24303c;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 0 2%;
-
+  flex: 1;
+  background: #14171c;
+  text-align: center;
+  padding: 1rem;
+  border-radius: 0.5rem;
 }
+
 .Stats-block-a {
-    border-left: 0px solid #24303c;
+  background: #2a333d;
+}
 
-}
-  
 .Stats-block-value {
-    align-self: center;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #ffffff;
 }
+
 .Stats-block-text {
-    display: inline;
-    white-space: nowrap;
-    color: #667788;
-    font-size: 0.8rem;
+  font-size: 0.85rem;
+  color: #99aabb;
+  margin-top: 0.25rem;
+}
+
+/* Últimos libros */
+.LastBooks h3 {
+  color: #99aabb;
+  margin-bottom: 1rem;
+  font-size: 1.25rem;
+}
+
+.LastBooks-list {
+  display: flex;
+  gap: 1rem;
+}
+
+.BookCard {
+  display: block;
+  width: 30%;
+  background: #14171c;
+  border-radius: 0.5rem;
+  text-decoration: none;
+  color: #dde2e8;
+  padding: 0.75rem;
+  text-align: center;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.BookCard:hover {
+  background: #2a333d;
+  transform: translateY(-4px);
+}
+
+.BookCard-cover {
+  width: 100%;
+  height: auto;
+  border-radius: 0.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.BookCard-title {
+  font-size: 1rem;
+  font-weight: 500;
+  margin-bottom: 0.25rem;
+}
+
+.BookCard-author {
+  font-size: 0.85rem;
+  color: #99aabb;
+}
+
+.no-books {
+  text-align: center;
+  color: #777;
 }

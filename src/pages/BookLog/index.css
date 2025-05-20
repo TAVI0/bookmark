@@ -1,50 +1,61 @@
-td {
-    color: #ffffff;
-    padding: 20px 10px;
-    /* Línea gris al final de cada fila */
-  }
-  tr {
-    position: relative; /* Necesario para que el pseudo-elemento se posicione correctamente */
-  }
-  
-  tr::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    width: 100%;
-    border-bottom: 1px solid #2a323d; /* Línea gris continua al final de cada fila */
-  }
-  
-.logoBook{
-  width: 50px;
+.book-cover {
+  width: 40px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 0.25rem;
 }
 
-/* Estilo básico para todos los enlaces de navegación con la clase BookName */
-.BookName {
-  color: #ffffff; /* Cambia este color al que desees */
+.book-title {
+  color: #99aabb;
+  font-weight: 500;
   text-decoration: none;
 }
 
-/* Estilo para enlaces visitados */
-.BookName:visited {
-  color: #ffffff; /* El mismo color que para los enlaces normales */
-  text-decoration: none;
-}
-
-/* Estilo para enlaces al enfocarse */
-.BookName:focus {
+.book-title:hover {
   color: #ffffff;
-  text-decoration: none;
 }
 
-/* Estilo para enlaces al pasar el cursor por encima */
-.BookName:hover {
-  color: #ffffff;
-  text-decoration: none;
+.author {
+  color: #dde2e8;
 }
 
-/* Estilo para enlaces activos (al hacer clic) */
-.BookName:active {
+.date-cell {
+  color: #ccd6dd;
+  text-align: center;
+}
+
+.dash-cell {
+  color: #555;
+  text-align: center;
+}
+
+.rating {
+  display: flex;
+  align-items: center;
+}
+
+.icon-cell {
+  text-align: center;
+  font-size: 1.1rem;
+}
+
+.icon {
+  vertical-align: middle;
+}
+
+.liked {
+  color: #e25555;
+}
+
+.not-liked {
+  color: #555;
+}
+
+.edit-icon {
+  cursor: pointer;
+  color: #99aabb;
+}
+
+.edit-icon:hover {
   color: #ffffff;
-  text-decoration: none;
 }

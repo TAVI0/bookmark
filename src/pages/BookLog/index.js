@@ -1,39 +1,63 @@
 import React from "react";
 import { AiFillEdit } from 'react-icons/ai';
 import { GrTextAlignFull } from 'react-icons/gr'; 
-import { BsFillSuitHeartFill} from 'react-icons/bs';
+import { BsFillSuitHeartFill } from 'react-icons/bs';
 import { BookContext } from "../../BookContext";
-import './index.css'
 import { NavLink } from "react-router-dom";
+import "./index.css";
 
-function BookLog({post}){
-    const {
-        starsSistem,
-    } = React.useContext(BookContext);
+function BookLog({ post }) {
+  const { starsSistem } = React.useContext(BookContext);
+  const book = post.book;
+  const user = post.userEntity;
+  const { completedStars, halfStar } = starsSistem(post.rated);
 
-    const book = post.book;
-    const user = post.userEntity;
+  const hasReview = post.review ? <GrTextAlignFull /> : null;
+  const likedIcon = post.liked
+    ? <BsFillSuitHeartFill className="icon liked" />
+    : <BsFillSuitHeartFill className="icon not-liked" />;
 
-    const {completedStars,halfStar} = starsSistem(post.rated);
-    const HasReview = post.review != null && <GrTextAlignFull/>;
-    const liked = post.liked ? <BsFillSuitHeartFill fill='red'/> : <BsFillSuitHeartFill fill='gray'/>;
-    const dateObject = new Date(post.datePost);
-    const formattedDate = dateObject.toLocaleDateString("en-GB"); // Formato "yyyy-mm-dd"
-    const bookNameLink = book.name.replace(/\s+/g, '-');
-    return(
+  const startDate = post.dateStart
+    ? new Date(post.dateStart).toLocaleDateString("es-AR")
+    : "-";
+  const endDate = post.dateEnd
+    ? new Date(post.dateEnd).toLocaleDateString("es-AR")
+    : "-";
+
+  const bookLink = book.name.replace(/\s+/g, '-').toLowerCase();
+
+  return (
     <tr>
-        <td><img className="logoBook"  src ="/logobook.png" alt="logo libro"/></td>
-        <td><NavLink className="BookName" to={'/'+user.username+'/books/'+bookNameLink} >{book.name}</NavLink></td>
-        <td>{book.writer}</td>
-        <td></td>
-        <td>-</td>
-        <td>{formattedDate}</td>
-        <td>{completedStars}{halfStar}</td>
-        <td>{HasReview}</td>
-        <td>{liked}</td>
-        <td><AiFillEdit/></td>
+      <td>
+        <img
+          className="book-cover"
+          src="/logobook.png"
+          alt={`Portada de ${book.name}`}
+        />
+      </td>
+      <td>
+        <NavLink
+          className="book-title"
+          to={`/${user.username}/books/${bookLink}`}
+        >
+          {book.name}
+        </NavLink>
+      </td>
+      <td className="author">{book.writer}</td>
+      <td className="date-cell">{book.dateStart}</td>
+      <td className="dash-cell">–</td>
+      <td className="date-cell">{book.dateEnd}</td>
+      <td className="rating">
+        {completedStars}
+        {halfStar}
+      </td>
+      <td className="icon-cell">{hasReview}</td>
+      <td className="icon-cell">{likedIcon}</td>
+      <td className="icon-cell edit-icon">
+        <AiFillEdit />
+      </td>
     </tr>
-    )
+  );
 }
 
-export {BookLog};
+export { BookLog };
