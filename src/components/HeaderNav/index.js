@@ -28,7 +28,7 @@ function HeaderNav() {
         <img
           className="w-24 cursor-pointer"
           alt="BookTrack Logo"
-          src="/logo.png"
+          src="https://imgur.com/YcCiCS3.png"
           draggable="false"
           onClick={() => navigate('/')}
         />
